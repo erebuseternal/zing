@@ -97,3 +97,28 @@ code {
   font-weight: bold;
 
 }
+
+.accordion {
+  position: relative;
+  top: 10px;
+  border: none;
+  font-size: 1.5em;
+  background-color: rgb(0, 153, 204);
+  border-radius: 0px 0px 0px 10px;
+}
+
+.accordion.active {
+  border-radius: 0px;
+}
+
+.accordion:hover {
+  background-color: rgb(0, 173, 224)
+}
+
+.solution {
+  display: none;
+}
+
+.solution.show {
+  display: block;
+}

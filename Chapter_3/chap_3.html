@@ -1,0 +1,50 @@
+<html>
+<head>
+  <title>MongoDB Chapter 3</title>
+  <link rel="stylesheet" type="text/css" href="chap_3.css"/>
+</head>
+<body>
+  <div class="banner">
+    <h1>Chapter 3</h1>
+    <div class="contents_menu">
+      <a href="../Chapter_2/chap_2.html">Chapter 2</a>
+      <a href="../Chapter_3/chap_3.html">Chapter 3</a>
+      <a href="#">Chapter 4</a>
+    </div>
+  </div>
+  <div class="lesson" id="one">
+    <h2>Insertion and Deletion of Data</h2>
+    <p>For <i>insertion</i>, refer back to <a href="../Chapter_2/chap_2.html">Chapter 2</a></p>
+    <p>For a database 'db' and collection 'collection', to <i>delete</i> you need only
+      run <code>db.collection.remove()</code>. This will remove all data from the
+      collection. To remove only a <i>subset</i>, pass a <i>query</i> into <code>remove</code>. Queries
+      are handled in <a href="../Chapter_4/chap_4.html">Chapter 4</a>.</p>
+  </div>
+  <div class="lesson" id="two">
+    <h2>Updating Data</h2>
+  </div>
+  <div class="lesson" id="three">
+    <h2>Project: A Family Gets Their Hair Dyed</h2>
+    <p>For this project, use the <code>tmp.people</code> collection created in
+      <a href="../Chapter_2/chap_2.html">Chapter 2</a> and do the following update:
+    </p>
+    <p class="code"><b>Everyone with the last name Dirac should get green hair</b></p>
+    <button class="accordion">Solution</button>
+    <div class="solution"><p>Here is the solution</p></div>
+  </div>
+
+
+  <script>
+  /* Toggle between adding and removing the "active" and "show" classes when the user clicks on one of the "Section" buttons. The "active" class is used to add a background color to the current button when its belonging panel is open. The "show" class is used to open the specific accordion panel */
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+
+  for (i = 0; i < acc.length; i++) {
+      acc[i].onclick = function(){
+          this.classList.toggle("active");
+          this.nextElementSibling.classList.toggle("show");
+      }
+  }
+  </script>
+</body>
+</html>
