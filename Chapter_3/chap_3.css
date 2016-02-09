@@ -64,6 +64,42 @@ body {
   top: 200px;
 }
 
+#four {
+  top: 250px;
+}
+
+#five {
+  top: 300px;
+}
+
+#six {
+  top: 350px;
+}
+
+#seven {
+  top: 400px;
+}
+
+#eight {
+  top: 450px;
+}
+
+#nine {
+  top: 500px;
+}
+
+#ten {
+  top: 550px;
+}
+
+#eleven {
+  top: 600px;
+}
+
+#twelve {
+  top: 650px;
+}
+
 .lesson p {
   padding: 0px 10px 0px 10px;
   line-height: 20px;
@@ -87,7 +123,7 @@ code {
 
 .gap {
   position: relative;
-  top: 100px;
+  top: 700px;
   height: 30px;
 }
 
@@ -121,4 +157,18 @@ code {
 
 .solution.show {
   display: block;
+}
+
+.query {
+  border-radius: 0px;
+  background-color: rgb(250, 97, 46);
+
+}
+
+.query_text {
+  color: rgb(250, 97, 46);
+}
+
+.query:hover {
+  background-color: rgb(230, 77, 26);
 }
