@@ -1,7 +1,14 @@
 
 load("/root/zing/Chapter_2/create_data.js");
 db.people.drop();
-db.people.insert(people)
+db.people.insert(people);
+
+/*
+db.collection.update(query, update_document, is_upsert, for_all_matches)
+
+$inc, $set, $unset, $addToSet, $push, $pull, $pop, $each, $slice, $sort
+document.attribute, list.index
+*/
 
 function query_print(query, to_keep, num=1) {
   cursor = db.people.find(query, to_keep);

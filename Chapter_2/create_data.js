@@ -6,7 +6,9 @@ var hair_colors = ['red', 'blonde', 'brunette', 'white'];
 var eye_colors = ['blue', 'grey', 'green', 'brown', 'black'];
 var fruit_options = ['apple', 'banana', 'pineapple', 'lemon', 'strawberry', 'blueberry', 'grape'];
 
-
+function random(number) {
+  return Math.floor(number*Math.random() + 1);
+}
 
 var count = 0;
 var people = []
