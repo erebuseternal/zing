@@ -82,7 +82,7 @@ function Update9() {
   doc = {"rating" : 8, "quote" : "Only the wisest and stupidest of men never change.", "author" : "Confucious"};
   query = {"name" : {"first" : "joe", "last" : "smith"}};
   query_print(query, {"_id" : 0, "name.first" : 1, "comments" : 1});
-  print(db.people.update(query, {"$push" : {"comments" : {"$each" : [doc], "$sort" : -1}}}));
+  print(db.people.update(query, {"$push" : {"comments" : {"$each" : [doc], "$sort" : {"rating" : -1}}}}));
   query_print(query, {"_id" : 0, "name.first" : 1, "comments" : 1});
 }
 
