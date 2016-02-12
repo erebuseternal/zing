@@ -52,3 +52,5 @@ Collections are a list of documents, unless you use .snapshot (which moves
 through ids), you move down the list. If an element in the collection
 changes place, you will have the chance of seeing it many times in the same
 cursor.
+
+INSERT, DELETE, QUERY, UPDATE, UPSERT, AGGREGATE
