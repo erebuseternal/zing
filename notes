@@ -43,7 +43,7 @@ or $or, or it is a $where statement, or it is a attribute of the document,
 colon, and a 'value'. Values can either be an actual value, or they
 can be a conditional document. A conditional document uses
 $gt, $gte, $lt, $lte, $ne, $in, $nin, $all, $size or $elemMatch, and can
-potentially have many of these (if it makes sense). $in, $nin take lists
+potentially have many of these (if it makes sense) [separated by commas./mongod]. $in, $nin take lists
 $and and $or take lists of the same statements that make up a query. The
 statements at the top level are not surrounded by curly braces, but the ones
 inside are.
