@@ -1,0 +1,217 @@
+<html>
+  <head>
+    <title>Making a 4 Node Pi Cluster</title>
+    <link rel="stylesheet" type="text/css" href="picluster.css" />
+  </head>
+  <body>
+    <div class="content">
+      <div class="title">
+        <h1>Making Your Own 4 Node Pi Cluster</h1>
+      </div>
+      <div class="credits">
+        The following is based on Alasdair Allen's
+        <a href="http://makezine.com/projects/build-a-compact-4-node-raspberry-pi-cluster/">Project</a>
+      </div>
+      <div class="section">
+        <h2>Why a 4 Node Cluster?</h2>
+        <p>From Hadoop, to MongoDB, to Solr there are now many opensource projects
+          offering incredible functionality and all with the wonderful property of
+          scaling out instead of up. This is done by having them run on top of
+          a cluster which shares a network, which in turn allows us to scale our
+          application by simply adding more machines (also known as nodes) to the
+          cluster.
+        </p>
+        <p>Of course in order to practice running these technologies in the context
+          of a cluster we need a cluster! Now, technologies like MongoDB and Solr
+          distribute across a cluster by a method called sharding. Why this is important
+          to know at this stage is that in sharding, the nodes of our cluster make
+          decisions, keep track of state, and carry out other mechanisms that come
+          with running on a cluster by voting. And votes only pass if there is a
+          majority that votes together. This of course means that we cannot use
+          two nodes only, because the majority in a two node cluster is, well, two.
+          This means that both of our nodes always have to be running properly,
+          which is honestly not very interesting (there is a lot of stuff in terms of
+          application resilience that cannot be played with when all of nodes always
+          have to be working). Therefore we need at least 3 nodes in our cluster.
+        </p>
+        <p>Another consideration is that we would prefer these nodes to have static
+          IP addresses rather than the dynamically allocated ones that are normal.
+          This simplyfies the configuration side of things incredibly, which allows
+          us to focus soley on our applications rather than fussing about with the
+          configurations all of the time. But because almost all home routers work
+          best with dynamically allocated addresses, we are going to want to create
+          an entirely separate network for our nodes. Thus, because we want to allow
+          for the possibility of failing some of our nodes (in order to try out
+          some of the cool stuff about distributed compting) we are going to want
+          the node that provides this network to be separate from the nodes that
+          would be part of our application.
+        </p>
+        <p>These considerations put together - create a cluster computing environment
+          to play around with, the need for at least three nodes in order to see
+          interesting behavior with technologies that use sharding, and the desire
+          for a separate network for our cluster - lead us to the simplest cluster
+          we can build that satisfies these: a four node cluster.
+        </p>
+      </div>
+      <div class="section">
+        <h2>What You'll Need</h2>
+        <ul>
+          <li>4 Raspberry Pi's (<a href="https://www.raspberrypi.org/help/quick-start-guide/">already setup</a>)</li>
+          <li><a href="http://www.amazon.com/Anker-Charger-PowerPort-Multi-Port-Samsung/dp/B00VH958F0">USB Charging Hub</a></li>
+          <li><a href="http://www.amazon.com/gp/product/B000FNFSPY">Ethernet Switch</a></li>
+          <li><a href="http://www.amazon.com/Sabrent-6-Pack-Premium-Cables-CB-UM61/dp/B011KMSNXM">4 USB to MiniUSB Cables</a></li>
+          <li><a href="http://www.amazon.com/Cable-Matters%C2%AE-5-Color-Snagless-Ethernet/dp/B00E5I7T9I">4 Ethernet Cables</a></li>
+          <li>HDMI Cable</li>
+          <li>HDMI Capable Screen</li>
+          <li>Keyboard</li>
+          <li>Mouse</li>
+          <li><a href="http://www.amazon.com/Edimax-EW-7811Un-150Mbps-Raspberry-Supports/dp/B003MTTJOY">Wifi Adaptor</a></li>
+        </ul>
+      </div>
+      <div class="section">
+        <h2>Setting Up the Internal Network</h2>
+        <p>First, <b>pick the pi that will provide the network</b> and plug the wifi adaptor
+          into it and <b>connect to your home network</b>. Next open terminal and <b>run
+          the following command</b>:
+        </p>
+        <p class="code"><code>sudo apt-get install isc-dhcp-server</code>
+        </p>
+        <p>This will install a server to provide IP addresses to the nodes in
+          your network. Now that that has been installed you no longer need to
+          be connected to an external network.
+        </p>
+        <p>Next we will configure the eth0 interface (which is the ethernet adaptor)
+          to use static IP addresses. <b>Edit the file <code>/etc/network/interfaces</code></b>
+          on rpi0 so that for eth0 we have:
+        </p>
+        <p class="code">
+          <code>auto eht0</br>
+          allow-hotplug eth0</br>
+          iface eth0 inet static</br>
+          &nbsp;address 192.168.50.1</br>
+          &nbsp;netmask 255.255.255.0</br>
+          &nbsp;network 192.168.50.0</br>
+          &nbsp;broadcast 192.168.50.255</br>
+          </code>
+        </p>
+        <p>The next thing we will do is configure the dhcp server. To do this we
+          will need the hardware addresses for our ethernet ports. Therefore at
+          this point you going to have to <b>pick which raspberry pis are which</b>, and
+          we are going to <b>give them distinct names</b> so that we can differentiate between
+          them.
+        </p>
+        <p>
+          You have already chosen the pi that will provide your network. We will
+          henceforth refer to it as <b>rip0</b>. Now give each of the three remaining pis
+          one of the names <b>rpi1, rpi2, and rpi3</b>. Make sure you keep track of which
+          is which.
+        </p>
+        <p>
+          Now we will go ahead and <b>get the hardware addresses for each</b>. To do this,
+          in each pi enter terminal and <b>run the command <code>ifconfig</code></b>. In the
+          output <b>find the entry for <code>eth0</code></b>. The value corresponding
+          to <b>HWaddr</b> (which should something like <code>b8:27:eb:01:29:15</code>)
+          <b>is the hardware address</b> for that pi's ethernet port. Write this down
+          somewhere so you have it ready for the step below.
+        </p>
+        <p>
+          Now to configure our server.
+          Go ahead and <b>edit the file <code>/etc/dhcp/dhcpd.conf</code></b> on rpi0 so that,
+          besides lines which start with a # (which are commented out), we
+          have:
+        </p>
+        <p class="code">
+          <code>ddns-update-style none;</br>
+            authoritative;</br>
+            log-facility local7;</br></br>
+            subnet 192.168.1.0 netmask 255.255.255.0 {}</br></br>
+            group {</br>
+            &nbsp;option broadcast-address 192.168.50.255</br>
+            &nbsp;option routers 192.168.50.1;</br>
+            &nbsp;default-lease-time 600;</br>
+            &nbsp;max-lease-time;</br>
+            &nbsp;option domain-name "cluster";</br>
+            &nbsp;option domain-name-servers 8.8.8.8, 8.8.4.4;</br>
+            &nbsp;subnet 192.168.50.0 netmask 255.255.255.0 {</br>
+            &nbsp;&nbsp;range 192.168.50.14 192.168.50.250;</br>
+            &nbsp;&nbsp;host rpi0 {</br>
+            &nbsp;&nbsp;&nbsp;hardware ethernet [rpi0 hardware address];</br>
+            &nbsp;&nbsp;&nbsp;fixed-address 192.168.50.1;</br>
+            &nbsp;&nbsp;}</br>
+            &nbsp;&nbsp;host rpi1 {</br>
+            &nbsp;&nbsp;&nbsp;hardware ethernet [rpi1 hardware address];</br>
+            &nbsp;&nbsp;&nbsp;fixed-address 192.168.50.11;</br>
+            &nbsp;&nbsp;}</br>
+            &nbsp;&nbsp;host rpi2 {</br>
+            &nbsp;&nbsp;&nbsp;hardware ethernet [rpi2 hardware address];</br>
+            &nbsp;&nbsp;&nbsp;fixed-address 192.168.50.12;</br>
+            &nbsp;&nbsp;}</br>
+            &nbsp;&nbsp;host rpi3 {</br>
+            &nbsp;&nbsp;&nbsp;hardware ethernet [rpi3 hardware address];</br>
+            &nbsp;&nbsp;&nbsp;fixed-address 192.168.50.13;</br>
+            &nbsp;&nbsp;}</br>
+            &nbsp;}</br>
+            }
+          </code>
+        </p>
+        <p class="note"><i>Note that in the above you should replace [rpi0 hardware address]
+          with the hardware address you found for rpi0</i>
+        </p>
+        <p>Next <b>edit the file <code>/etc/default/isc-dhcp-server</code></b>
+          on rpi0 so that besides commented lines it reads:
+        </p>
+        <p class="code">
+          <code>DHCPD_CONF=/etc/dhcp/dhcpd.conf</br>
+            DHCPD_PID=/var/run/dhcpd.pid</br>
+            INTERFACES="eth0"</br>
+          </code>
+        </p>
+        <p>That completes configuring our dhcp server.
+        </p>
+        <p>Now, <b>for each raspberry pi</b> we need to configure the hosts and
+          the hostname. For each then <b>edit <code>/etc/hostname</code></b> so that
+          it reads:
+        </p>
+        <p class="code">
+          <code>[hostname]</code>
+        </p>
+        <p>Then (also for each pi) <b>edit <code>/etc/hosts</code></b> to read:
+        </p>
+        <p class="code">
+          <code>127.0.0.1 localhost</br>
+            ::1 localhost ip6-localhost ip6-loopback</br>
+            fe00::0 ip6-localnet</br>
+            ff00::0 ip6-mcastprefix</br>
+            ff02::1 ip6-allnodes</br>
+            ff02::2 ip6-allrouters</br></br>
+            127.0.1.1 [hostname] [hostname].local [hostname].lan [hostname].cluster</br></br>
+            192.168.50.1 rpi0 rpi0.local rpi0.lan rpi0.cluster</br>
+            192.168.50.11 rpi1 rpi1.local rpi1.lan rpi1.cluster</br>
+            192.168.50.12 rpi2 rpi2.local rpi2.lan rpi2.cluster</br>
+            192.168.50.13 rpi3 rpi3.local rpi3.lan rpi3.cluster</br>
+          </code>
+        </p>
+        <p class="note"><i>Note that for rpi0 we would replace [hostname] with rpi0, for
+        rpi1, [hostname] would be replaced by rpi1, etc.</i>
+        </p>
+        <p>
+          And with that our internal network has been configured. <b>Now, shutdown all
+          four pis</b>. Then, using the USB to microUSB cables <b>plug each pi into
+          the</b> (currently unplugged) <b>USB charging hub</b>. Next using the
+          ethernet cables, <b>plug the pis into the ethernet switch</b> (which should base
+          plugged in). Now, when you <b>boot up the raspberry pis</b> by plugging
+          in the USB charging hub, your internal network should set itself up
+          and you should be good to go!
+        </p>
+        <p class="note"><i>To check that things are working enter rpi0 and run <code>ifconfig</code>.
+          Check that the eth0 IP address is 192.168.50.1. Then try to ssh from rpi0 into,
+          rpi1, rpi2, and rpi3. If all of that works out, you are golden!</i>
+        </p>
+        <p class="note"><i>If things don't work check for typos in your edits and make
+        sure the hardware addresses you wrote into the dhcpd.conf file are really the
+        hardware addresses of your pis.</i>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
