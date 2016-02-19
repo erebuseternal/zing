@@ -266,6 +266,146 @@
         when ssh'ing into it from a machine that's not in your cluster.</i>
         </p>
       </div>
+      <div class="section">
+        <h2>Connecting rpi1, rpi2, and rpi3 to the Internet</h2>
+        <p>Up until now, while rpi0 can connect to the internet via its wifi adaptor,
+          the rest of the pi's in our cluster cannot see the internet. But in order
+          to make full use of the package manager that comes with linux and to be
+          able to download software through the internet we need to allow them to
+          reach the internet. Therefore, we are going to turn rpi0 into a router
+          which will forward ip packets destined for places outside of our internal
+          network out in your home network and from there to the internet!
+        </p>
+
+        <h3>Turning On Packet Forwarding</h3>
+        <p>
+          The first thing we need to do is allow packet forwarding on rpi0 so
+          that it actually can forward packets out into your home network. To
+          do this <b>run</b>:
+        </p>
+        <p class="code">
+          <code>sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
+          </code>
+        </p>
+        <p>and then <b>edit <code>/etc/sysctl.conf</code></b> by uncommenting the
+          line:
+        </p>
+        <p class="code">
+          <code>net.ipv4.ip_forward=1
+          </code>
+        </p>
+        <p class="note"><i>Uncommenting is done by remove the # at the beginning
+          of the line</i>
+        </p>
+        <h3>Checking Routing Tables</h3>
+        <p>Next we need to make sure that given a packet that is destined for an
+          address besides one in our internal network, that our pi's will in fact
+          be routing it to the appropriate place. To check this we will be
+          checking linux's main routing table.
+        </p>
+        <h4>Checking rpi0</h4>
+        <p>To look at the routing table <b>run <code>route -n</code></b>. Then
+          check to make sure there is a line with these first two entries:
+        </p>
+        <p class="code">
+          <code>0.0.0.0&nbsp;[your home router's ip address]
+          </code>
+        </p>
+        <p class="note"><i>Note that by convention if your home network is, for example,
+        192.168.1.0 then your router's ip address will be 192.168.1.1 (i.e. the first
+        ip address in the network).</i>
+        </p>
+        <p>What this entry means is that if a packet addressed for a networked not
+          matched by any other lines in your routing table is being sent, it will be sent
+          to your home router. And this is exactly the behavior we want. Because your
+          home router is the next step on the way to the internet.
+        </p>
+        <p><b>If the line is absent</b> then <b>run</b>:
+        </p>
+        <p class="code">
+          <code>sudo route add default gw [your home router's ip address]
+          </code>
+        </p>
+        <p>to add that line.</p>
+
+        <h4>Checking the Other Pi's</h4>
+        <p><b>For each of the other pi's</b> check the routing table with
+          <b><code>route -n</code></b> and once again
+          check to make sure there is a line with these first two entries:
+        </p>
+        <p class="code">
+          <code>0.0.0.0&nbsp;192.168.50.1
+          </code>
+        </p>
+        <p>This entry means is that if a packet addressed for a networked not
+          matched by any other lines in your routing table is being sent, it will be sent
+          to your rpi0 which is the router for your internal network.
+        </p>
+        <p><b>If the line is absent</b> then <b>run</b>:
+        </p>
+        <p class="code">
+          <code>sudo route add default gw 192.168.50.1
+          </code>
+        </p>
+        <p>to add that line.</p>
+        <h3>Configuring NAT</h3>
+        <p>The final thing we need to configure on rpi0 is NAT which allows for the
+          sharing of a single ip address by many machines (in this case rpi0's
+          address on your home network is going to be shared by the pi's in
+          your cluster).
+        </p>
+        <p>To do this first <b>run</b> the following lines
+        </p>
+        <p class="code">
+          <code>
+            sudo iptables -t nat -A POSTROUTING -j MASQUERADE</br>
+            sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
+          </code>
+        </p>
+        <p>Then, we need to make sure that this configuration is reloaded on
+          each reboot. To do this, <b>edit <code>~/.bashrc</code></b> and add
+          the following line to the end of the file:
+        </p>
+        <p class="code">
+          <code>sudo iptables-restore < /etc/iptables.ipv4.nat
+          </code>
+        </p>
+        <p><code>~/.bashrc</code> is run on each boot, and therefore the above line
+          will now be run on each boot as well.
+        </p>
+        <h3>All Done!</h3>
+        <p>Now if everything worked out you should be able to ping anything on the internet
+          (example ip address 8.8.8.8) from rpi1, rpi2, and rpi3 and get a response (assuming
+          of course that rpi0 is connected to your home network).
+        </p>
+        <p>And with that you have a fully functioning cluster! Your nodes can talk over
+          a private network where you don't have to worry about ip addresses changing, they
+          don't need passwords to ssh each other, they can all connect to the internet,
+          and you can ssh into the cluster from any machine (ssh capable) in your home network
+          through rpi0! Congrats!
+        </p>
+        <p class="note">To ssh into rpi0 from a machine on your home network first find
+          what rpi0's ip address on your network (it should be the ip address corresponding
+          to wlan0) and then ssh pi@[rpi0's ip address]. You will be prompted for a password
+          but after you enter that you will be in rpi0 and wil have complete access to the
+          rest of the cluster.
+        </p>
+      </div>
+      <div class="section">
+        <h2>Credits</h2>
+        <ul>
+          <li><a href="http://makezine.com/projects/build-a-compact-4-node-raspberry-pi-cluster/">Internal Network Setup</a></li>
+          <li><a href="https://www.raspberrypi.org/documentation/remote-access/ssh/passwordless.md">SSH Keys</a></li>
+          <li><a href="http://makezine.com/projects/build-a-compact-4-node-raspberry-pi-cluster/">Packet Forwarding</a></li>
+          <li><a href="http://linux-ip.net/html/basic-changing.html">Routing Table Interaction</a></li>
+          <li><a href="http://linux-ip.net/html/routing-forwarding.html">Routing Table Check</a></li>
+          <li><a href="http://jacobsalmela.com/raspberry-pi-and-routing-turning-a-pi-into-a-router/">NAT Configuration</a></li>
+          <li><a href="http://makezine.com/projects/build-a-compact-4-node-raspberry-pi-cluster/">Saving iptables</a></li>
+        </ul>
+      </div>
+      <footer>
+        <p>Copyright &#9400; 2016 by Marcel Gietzmann-Sanders</p>
+      </footer>
 
   </body>
 </html>
