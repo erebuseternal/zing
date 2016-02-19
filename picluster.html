@@ -222,6 +222,50 @@
         hardware addresses of your pis.</i>
         </p>
       </div>
+      <div class="section">
+        <h2>Generating SSH Keys</h2>
+        <p>So now that we have this internal network we can ssh from any one of
+          the pi's to any of the others. And if rpi0 has the wireless adaptor
+          plugged in, then we can ssh into it from any computer (with ssh
+          capabilities) in our home network and from there can ssh into any of
+          the pi's. But, if you have passwords for your pi's then every time we
+          ssh we have to supply that password we obviously need to fix this.
+        </p>
+        <p>The procedure for doing this is pretty simple, so I'm just going
+          to outline the steps to take, for more on this subject visit this
+          <a href="https://www.raspberrypi.org/documentation/remote-access/ssh/passwordless.md">page</a>.
+        <h3>Generating the Keys</h3>
+        <p>First, <b>for each pi</b> enter the following command:
+        </p>
+        <p class="code">
+          <code>sudo ssh-keygen -t rsa</code>
+        </p>
+        <p>and then to generate the key with the default settings just <b>hit Enter
+          until you get back to the terminal prompt</b>.
+        </p>
+        <p>Once you have done this public and private key pairs have been created
+          and placed in <code>/home/pi/.ssh</code>.
+        </p>
+        <h3>Sharing Keys Between Pi's</h3>
+        <p>Now, in order to <b>share</b> a pi's <b>public key</b> with each of the
+          other pi's we <b>run</b> (from the pi with the public key we are trying to share):
+        </p>
+        <p class="code">
+          <code>cat /home/pi/.ssh/id_rsa.pub | ssh [pi hostname] 'cat >> /home/pi/.ssh/authorized_keys'
+          </code>
+        </p>
+        <p>once <b>for each of the other pi's</b> where we replace [pi hostname] with the
+          other pi's hostname (example rpi1). So if we were sharing rpi2's public key,
+          we would run the above from rpi2 once for rpi0, once for rpi1, and once for rpi3.
+        </p>
+        <p>After you gone through all of the pi's and shared each's public key with
+          all of the other pi's in the cluster, you'll be good to go and will no
+          longer need to enter a password when ssh'ing from one pi into another.
+        </p>
+        <p class="note"><i>Note that you will still need to enter rpi0's password
+        when ssh'ing into it from a machine that's not in your cluster.</i>
+        </p>
+      </div>
 
   </body>
 </html>
