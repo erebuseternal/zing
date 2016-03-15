@@ -1,0 +1,70 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="object.css" />
+</head>
+<body>
+<div class="whole">
+	<h1>Evaluation</h1>
+	<div class="subject">
+		<p>
+		Besides conditions, loops, and definitions (which we will get to later) <b>every line of code</b> that doesn't appear on the left-hand side of an equals sign always <b>evaluates to an object</b>.
+		</p>
+	</div>
+	<h1>None</h1>
+	<div class="subject">
+	<p>
+	<b><code>None</code></b> is a special python object that is used to represent the lack of an object. So when a line of code should evaluate to nothing, it evaluates to <b>python's version of nothing</b>, <code>None</code>, which is still an object. Note that like any other object, you can assign <code>None</code> any number of other names.
+	</p>
+	</div>
+	<h1>Booleans: True and False</h1>
+	<div class="subject">
+	<p>
+	<b><code>True</code> and <code>False</code></b>, called booleans, are two special objects. In python, <b>every object</b> not only evaluates to itself, but <b>also evaluates to one of these two</b>. And the rules for what evaluates to what are quite simple. I'll divide them up by the type of object (and don't worry if some of this doesn't make sense, it will become clear as we move along).
+	</p>
+	<div class="howto">
+	<h3>Who Evaluates to What</h3>
+	<ul>
+		<li>Sequences and Dictionaries</li>
+		<ul>
+			<li>Ones without elements evaluate to <code>False</code></li>
+			<li>Ones with elements evaluate to <code>True</code></li>
+		</ul>
+		<li>Numbers</li>
+		<ul>
+			<li>0 evaluates to <code>False</code></li>
+			<li>Everynumber that isn't 0 evaluates to <code>True</code></li>
+		</ul>
+		<li>Booleans</li>
+		<ul>
+			<li><code>False</code> is <code>False</code></li>
+			<li><code>True</code> is <code>True</code></li>
+		</ul>
+		<li>All Other Objects</li>
+		<ul>
+			<li><code>None</code> evaluates to <code>False</code></li>
+			<li>Everything else evaluates to <code>True</code> (unless otherwise stated)</li>
+		</ul>
+	</ul>
+	</div>
+	<p>
+	Finally <b>there are three ways you can combine <code>True</code> and <code>False</code></b> to get either <code>True</code> or <code>False</code>: <b><code>and</code>, <code>not</code>, and <code>or</code></b>. And they are just like their english versions!
+	</p>
+	<div class="howto">
+	<h3>Boolean Operators</h3>
+	<table>
+		<tr>
+		<td><code>and</code><td>
+		<td>For <code>a and b</code> to be True both <code>a</code> and <code>b</code> have to be True.</td>
+		</tr>
+		<tr>
+		<td><code>or</code><td>
+		<td>For <code>a or b</code> to be True either <code>a</code>, <code>b</code>, or both have to be True.</td>
+		</tr>
+		<tr>
+		<td><code>not</code><td>
+		<td><code>not True</code> is <code>False</code> and <code>not False</code> is </code>True</code>.</td>
+		</tr>
+	</div>
+	</div>
+</div>
+</body>
