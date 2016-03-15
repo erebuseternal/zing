@@ -1,0 +1,118 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="object.css" />
+</head>
+<body>
+<div class="whole">
+	<h1>Variables</h1>
+	<div class="subject">
+	<p>
+	A <b>variable</b> in python <b>is simply a name</b>. <b>Names</b> are how we <b>reference</b> all <b>objects</b> in python. Because names are used to tell things apart, <b>each name can be assigned to at most one object</b>. On the other hand just like a person can have multiple names, <b>each object can have multiple names</b> assigned to it. 
+	<div class="howto">
+	<h3>How to Assign a New Name</h3>
+	To assign a new name to an object we write:
+	</p>
+	<p>
+	<code><b>name = object</b></code>
+	</p>
+	<ol>
+		<li>The <b>name</b> we want to use</li>
+		<li>An <b>equals sign</b></li>
+		<li>One of the <b>object's old name</b>s</li>
+	</ol>
+	</div>
+	</div>
+	<h3>Assigning a Name: one old name</h3>
+	<div class="example">
+	<p>
+	Suppose I have a snake object currently given the name <code>cyber_joe</code>. Let's give him a longer name: <code>cyber_joseph</code>. We do so by writing:
+	</p>
+	<p>
+	<code>cyber_joseph = cyber_joe</code>
+	</p>
+	<p>
+	Now the object referenced by the name <code>cyber_joe</code> also has the name <code>cyber_joseph</code>.
+	</p>
+	</div>
+	<h3>Assigning a Name: many old names</h3>
+	<div class="example">
+	<p>
+	Now say that we want to give <code>cyber_joe</code> a nickname: <code>cyber_snake</code>. Because <code>cyber_joe</code> has two names so far, we can use either of the following lines to give him his nickname:
+	</p>
+	<p>
+	<code>cyber_snake = cyber_joe</code></br>
+	<code>cyber_snake = cyber_joseph</code>
+	</p>
+	</div>
+	<h3>Reusing a Name</h3>
+	<div class="example">
+	<p>
+	Suppose now <code>cyber_joe</code> has a kid: <code>baby_snake</code>. <code>cyber_joe</code> desides that he want's to give his name to his newborn child. We can do this easily with:
+	</p>
+	<p>
+	<code>cyber_joe = baby_snake</code>
+	</p>
+	<p>
+	But now, because a name can only reference one object, <code>cyber_joe</code> no longer references the snake we used to call <code>cyber_joe</code>. Instead <code>cyber_joe</code> now references <code>baby_snake</code>. This does not mean that we have lost the old <code>cyber_joe</code> because his object is still referenced by the names <code>cyber_joseph</code> and <code>cyber_snake</code>. So long as he as at least one name, we won't have lost him.
+	</div>
+	<h2>Some Rules</h2>
+	<div class="subsubject">
+	<div class="howto">
+	<h3>Rules for Creating Names</h3>
+	<ul>
+		<li>Names can only be composed of letters, numbers, and underscores</li>
+		<li>Names cannot start with a number</li>
+		<li>Names are case sensitive: <code>cyber_joe</code> is different from <code>Cyber_joe</code></li>
+		<li>The words in the following table should not be used as names</li>
+	</ul>
+	<table>
+		<tr>
+			<td>and</td>
+			<td>as</td>
+			<td>assert</td>
+			<td>break</td>
+			<td>class</td>
+			<td>continue</td>
+			<td>def</td>
+		</tr>
+		<tr>
+			<td>del</td>
+			<td>elif</td>
+			<td>else</td>
+			<td>except</td>
+			<td>exec</td>
+			<td>False</td>
+			<td>finally</td>
+		</tr>
+		<tr>
+			<td>for</td>
+			<td>from</td>
+			<td>global</td>
+			<td>if</td>
+			<td>import</td>
+			<td>in</td>
+			<td>is</td>
+		</tr>
+		<tr>
+			<td>lambda</td>
+			<td>None</td>
+			<td>not</td>
+			<td>or</td>
+			<td>pass</td>
+			<td>print</td>
+			<td>raise</td>
+		</tr>
+		<tr>
+			<td>return</td>
+			<td>True</td>
+			<td>try</td>
+			<td>while</td>
+			<td>with</td>
+			<td>yield</td>
+		</tr>
+	</table>
+	</div>
+	</div>
+</div>
+</body>
+</html>

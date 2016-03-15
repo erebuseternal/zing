@@ -36,6 +36,20 @@ div h4 {
 	background-color: white;
 }
 
+table {
+	border: 1px solid black;
+	
+}
+
+td {
+		text-align: center;
+}
+
+td {
+	padding: 5px;
+}
+
+
 .subsubject {
 	background-color: rgb(255, 164, 119);
 }
