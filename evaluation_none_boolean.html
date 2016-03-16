@@ -7,7 +7,7 @@
 	<h1>Expressions</h1>
 	<div class="subject">
 		<p>
-		An <b>expression</b> in python is a <b>line of code that evaluates to an object</b>. These lines are <b>composed of objects and function calls</b> (we will get to functions later) <b>separated by operators</b>. Operators take two objects and produce a third from them.
+		An <b>expression</b> in python is simply a <b>line of code that evaluates to an object</b>. In python, these lines are <b>composed of objects and function calls</b> (we will get to functions later) <b>separated by</b> things called <b>operators</b>. The objects are, of course, referenced by one of their names. These things called <b>operators</b> are like "+" and "-": they <b>take two objects and evaluate them to a third</b>. Right now, it isn't important that you know what operators you can use in python. 
 		</p>
 		<p>
 		Here is a simple expression:
@@ -19,33 +19,30 @@
 		This expression has two objects (in this case numbers) separated by the operator of addition. This of course evaluates to the number 2.
 		</p>
 		<p>
-		Expressions don't have to have operators in them. Here is an example of the simplest expression you can have:
+		Expressions don't have to have operators in them. They can instead be a single object or function call. Here is an example of the simplest expression you can have:
 		</p>
 		<p>
 		<code>1</code>
 		</p>
 		<p>
-		This expression evaluates to one of course.
-		</p>
-		<p>But once again, expression are simply objects and function calls strung together with operators. And 
-		all expressions evaluate to an object.
+		This expression just evaluates to <code>1</code> itself.
 		</p>
 		<h4>Order of Operations</h4>
 		<p>
-		Now take the expression <code>1 + 2 * 3</code>. If we evaluate it using normal order of operations it evaluates to <code>7</code>. If we evaluate it strictly from left to right we get <code>6</code>. To remove this ambiguity, python has a strict order of operations. More often than not this is not going to be strictly from left to right. So how are they ordered? We will learn to that as we learn the operations that you can use.
+		Now consider the expression <code>1 + 2 * 3</code>. A question arises: does the multiplication operator take, for its two objects, <code>2</code> and <code>3</code>, or <code>3</code> and <code>3</code>. In other words, does <code>1 + 2</code> evaluate first, or does <code>2 * 3</code>? In order to answer to question, <b>python has a strict order of operations</b>. I will show you this ordering over time as you learn the various operators.
+		</p>
+		<h4>Controlling the Order of Operations</h4>
+		<p>
+		There is one way that you can always control the order of operations. Any <b>part of an expression surrounded by parenthesis</b>, specifically "(" and ")", <b>will be evaluated before the rest of the expression</b> is evaluated. Therefore:
 		</p>
 		<p>
-		But there is one way that you can always control the order of operations. Any part of an expression surrounded by parenthesis, specifically "(" and ")", will be evaluated before the rest of the expression is evaluated. Therefore:
+		<code>(1 + 2) * 3</code> becomes <code>3 * 3</code>
 		</p>
+		<p><code>1 + (2 * 3)</code> becomes <code>1 + 6</code></p>
+		<p>Finally <b>you can</b> always <b>put parenthesis</b> inside other parenthesis:</p>
 		<p>
-		<code>(1 + 2) * 3</code>
+		<code>((2 + 3) + (3 - 2) * 2) * 3</code> becomes <code>(5 + 1 * 2) * 3</code>
 		</p>
-		<p>becomes</p>
-		<p><code>3 * 3</code></p>
-		<p>and similarly</p>
-		<p><code>1 + (2 * 3)</code></p>
-		<p>becomes</p>
-		<p>1 + 6</p>
 	</div>
 	<h1>None</h1>
 	<div class="subject">
