@@ -4,11 +4,48 @@
 </head>
 <body>
 <div class="whole">
-	<h1>Evaluation</h1>
+	<h1>Expressions</h1>
 	<div class="subject">
 		<p>
-		Besides conditions, loops, and definitions (which we will get to later) <b>every line of code</b> that doesn't appear on the left-hand side of an equals sign always <b>evaluates to an object</b>.
+		An <b>expression</b> in python is a <b>line of code that evaluates to an object</b>. These lines are <b>composed of objects and function calls</b> (we will get to functions later) <b>separated by operators</b>. Operators take two objects and produce a third from them.
 		</p>
+		<p>
+		Here is a simple expression:
+		</p>
+		<p>
+		<code>1 + 1</code>
+		</p>
+		<p>
+		This expression has two objects (in this case numbers) separated by the operator of addition. This of course evaluates to the number 2.
+		</p>
+		<p>
+		Expressions don't have to have operators in them. Here is an example of the simplest expression you can have:
+		</p>
+		<p>
+		<code>1</code>
+		</p>
+		<p>
+		This expression evaluates to one of course.
+		</p>
+		<p>But once again, expression are simply objects and function calls strung together with operators. And 
+		all expressions evaluate to an object.
+		</p>
+		<h4>Order of Operations</h4>
+		<p>
+		Now take the expression <code>1 + 2 * 3</code>. If we evaluate it using normal order of operations it evaluates to <code>7</code>. If we evaluate it strictly from left to right we get <code>6</code>. To remove this ambiguity, python has a strict order of operations. More often than not this is not going to be strictly from left to right. So how are they ordered? We will learn to that as we learn the operations that you can use.
+		</p>
+		<p>
+		But there is one way that you can always control the order of operations. Any part of an expression surrounded by parenthesis, specifically "(" and ")", will be evaluated before the rest of the expression is evaluated. Therefore:
+		</p>
+		<p>
+		<code>(1 + 2) * 3</code>
+		</p>
+		<p>becomes</p>
+		<p><code>3 * 3</code></p>
+		<p>and similarly</p>
+		<p><code>1 + (2 * 3)</code></p>
+		<p>becomes</p>
+		<p>1 + 6</p>
 	</div>
 	<h1>None</h1>
 	<div class="subject">
