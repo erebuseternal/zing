@@ -36,6 +36,10 @@ div h4 {
 	background-color: white;
 }
 
+.howto h4 {
+	color: black;
+}
+
 table {
 	border: 1px solid black;
 	

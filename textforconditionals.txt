@@ -1,0 +1,55 @@
+Conditions:
+	
+What are Conditionals for? Conditionals allow you to write code that acts differently in different circumstances. 
+What are Conditionals? Conditionals are simply a set of components written out one after another. Each component is composed of: 
+1. a python expression that acts as our condition. (Remember every expression evaluate to an object and every object evaluates to either True or False).  
+2. code that should be run if the expression evaluates to True.
+
+How do Conditionals Work? When your code is run, python will look through each component in order and check its condition. Once it finds a condition that is true, it will execute that component's code and then skip the rest of the components. So only the first component who's condition is true has it's code run. The rest are ignored.  
+
+How do you Write Conditionals:
+The Syntax
+The components in a conditional are written in the following way:
+keyword condition:
+	some code 
+	
+And each of these components follow each other with no gaps in between them. Like:
+keyword1 condition1:
+	some code
+keyword2 condition2:
+	some code
+
+The Keywords:
+	
+Here are the rules:
+	The keyword for the first component is "if".
+	The keyword for the rest of the components is "elif"
+So, for example, the above would become:
+if condition1:
+	some code
+elif condition2:
+	some code
+
+There is one exception to these rules. If we have multiple components, the final component of our conditional can be written in the following way:
+else:
+	some code
+	
+What's useful about this statement is that if all of our other conditions fail, the code in our else statement will be executed. In some sense it is a shroter way of writing:
+
+elif True:
+	some code
+
+The Conditions:
+
+Like we said above, the conditions are just a python expression you create. These are what allow you to control which of the components has its code executed in a specific circumstance.
+
+The Code:
+
+First of all the code is completely up to you! But there is one thing to note. Notice that we indent the code in a component. Because it will only run if the condition is true and we don't want to confuse it with the rest of the code we have to make it distinct. In python you make such a distinction by indenting the lines of code in question to the right of the rest of the code you don't want to confuse it with. This will be something to remember.
+
+
+And that's all there is to conditionals!
+
+A couple of examples:
+
+	

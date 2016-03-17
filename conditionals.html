@@ -1,0 +1,87 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="object.css" />
+</head>
+<body>
+<div class="whole">
+	<h1>Conditionals</h1>
+	<div class="subject">
+	<h4>What are Conditionals for?</h4>
+	<p>
+	Conditionals allow you to have code that only gets executed when a certain condition is satisfied. This means that you can make your code act differently under different conditions.
+	</p>
+	<h4>How are Conditionals Constructed?</h4>
+	<p>
+	Conditionals are constructed from a set of components written one after another. Each component is composed of:
+	</p>
+	<ol>
+		<li>A keyword.</li> (This allows python to identify the conditional and its components)
+		<li>a python expression that acts as a condition. (Remember every expression evaluates to True or False [from the previous section on expressions and booleans])</li>
+		<li>code that should be run if the condition (expression) is true.</li>
+	</ol>
+	<h4>How do Conditionals Work?</h4>
+	<p>
+	When your code is run, python will look through each component in order and check its condition. Once it finds a condition that is true, it will execute that component's code and then skip the rest of the components. So the first component who's condition is the only one that has it's code run. This is useful if you have many pieces of code for completely different situations and only want one to execute per situation.  
+	</p>
+	<div class="howto">
+	<h3>Rules for Writing Conditionals</h3>
+	<h4>Keywords</h4>
+	<ul>
+		<li>First component has an <code>if</code></li>
+		<li>Subsequent components have <code>elif</code></li>
+	</ul>
+	<h4>Conditions</h4>
+	<p>
+	Any expression works for a condition.
+	</p>
+	<h4>Code</h4>
+	<p>
+	The code should be indented and you can use loops, expressions and/or more conditionals. Other than that it is completely up to you!
+	</p>
+	<h4>Optional <code>else</code></h4>
+	<p>
+	If you have multiple components, your final one can be a simple <code>else</code> statement:
+	</p>
+	<p><code>
+	else:</br>
+	&nbsp;some code
+	</code></p>
+	</div>
+	</div>
+	<h2>Writing Conditionals</h2>
+	<div class="subsubject">
+	<h4>The Syntax</h4>
+	<p>
+	The components in a conditional are written in the following way:
+	</p>
+	<p>
+	<code>keword condition:</br>
+	&nbsp;some code</code>
+	</p>
+	<p>
+	And each of these components follow each other with no gaps in between them. Like:
+	</p>
+	<p><code>
+	keyword1 condition1:</br>
+	&nbsp;some code</br>
+	keyword2 condition2:</br>
+	&nbsp;some code</br>
+	</code></p>
+	<h4>The Keywords</h4>
+	<p>
+	Here are the rules:
+	</p>
+	<ul>
+		<li>The keyword for the first component is "if".</li>
+		<li>The keyword for the rest of the components is "elif".</li>
+	</ul>
+	<p>
+	So, for example, the above would become:
+	</p>
+	<p><code>
+	if condition1:</br>
+	&nbsp;some code</br>
+	elif condition2:</br>
+	&nbsp;some code
+	</code></p>
+	</div>
