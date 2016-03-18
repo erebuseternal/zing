@@ -8,7 +8,7 @@ div {
 	border-radius: 10px;
 }
 
-div h4 {
+div h4,h5 {
 	color: white;
 }
 
@@ -59,8 +59,8 @@ td {
 }
 
 .conditional {
-	height: 200px;
-	width: 320px;
+	height: 150px;
+	width: 325px;
 	overflow: hidden;
 	background-color: black;
 	float: left;
@@ -71,4 +71,15 @@ td {
 	position: relative;
 	top: -80px;
 	left: -190px;
+}
+
+.multiline {
+	height: 75px;
+	background-color: black;
+}
+
+.multiline img {
+	position: relative;
+	top: -100px;
+	left: -50px;
 }

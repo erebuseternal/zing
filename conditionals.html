@@ -15,95 +15,53 @@
 	As an example, conditionals allow me to create a program that tells me "good morning" if the time is before 12:00 p.m. but tells me "good afternoon" if the time is after 12:00 p.m.
 	</p>
 	</div>
-	<h4>How are Conditionals Constructed?</h4>
 	<p>
-	Conditionals are constructed from a set of components written one after another. Each component is composed of:
+	Conditionals are able to do this thanks to their structure and the way they are executed.  
 	</p>
-	<div class="conditional">
-	<img src="conditional.png" />
-	</div>
+	<h4>Structure</h4>
 	<p>
-	</br>
-	</br>
-	<span style="color:red">
-	A keyword.
-	</span></br></br>
-	<span style="color:yellow">
-	A condition.
-	</span></br></br>
-	<span style="color:blue">
-	A colon.
-	</span></br></br>
-	<span style="color:white">
-	The code to be executed if the condition is true.
-	</span></br></br>
+	The blocks in a Conditional have their <span style="color:yellow">identifying text</span> be a condition, and their <span style="color:white">code</span> be the code to be executed if the condition is true. Conditions are simply python expressions. Because any python expression evaluates to an object, and because all objects evaluate to either True or False, any expression works as a condition. Once you have your blocks in mind, the Conditional is then written by placing the blocks one after another.
 	</p>
-	<div>
-	</div>
-	<p>I will get to <code>else</code> in a moment</p>
-	<h4>How do Conditionals Work?</h4>
+	<h4>How Conditionals are Executed</h4>
 	<p>
-	When your code is run, python will look through each component in order and check its condition. Once it finds a condition that is true, it will execute that component's code and then skip the rest of the components. So <b>the first component who's condition is true the only one that has it's code run</b>. This is useful if you have many pieces of code for completely different situations and only want one to execute per situation.  
+	When your code is run, python will look through each block in order and check its condition. Once it finds a condition that is true, it will execute that block's code and skip the rest of the blocks. So <b>the first component who's condition is true is the only one that has it's code run</b>. This is so that if you have many pieces of code for completely different situations only one will execute per situation. On the other hand, if you want many pieces to execute per situation you can always write several conditionals.
 	</p>
+	<h4>Writing Conditionals</h4>
+	So what are the rules for writing conditionals? As was stated above, writing conditionals is a simple as writing out its blocks one after the other. So here are the rules for those blocks.
 	<div class="howto">
-	<h3>Rules for Writing Conditionals</h3>
+	<h3>Rules for Writing the Blocks that Comprise Conditionals</h3>
 	<h4>Keywords</h4>
 	<ul>
-		<li>First component has an <code>if</code></li>
-		<li>Subsequent components have <code>elif</code></li>
+		<li>First block's keyword is an <code>if</code></li>
+		<li>Subsequent blocks use <code>elif</code> as their keyword</li>
 	</ul>
-	<h4>Conditions</h4>
+	<h4>Identifying Text</h4>
 	<p>
-	Any expression works for a condition.
+	Acts as the condition for the code that follows. Any expression is legal. Use the expression that gives you the condition you want.
 	</p>
 	<h4>Code</h4>
 	<p>
-	The code should be indented and you can use loops, expressions and/or more conditionals. Other than that it is completely up to you!
+	You can use loops, expressions and/or more conditionals. Other than that it is completely up to you!
 	</p>
-	<h4>Optional <code>else</code></h4>
+	<h4>Optional Final Block</h4>
 	<p>
-	If you have multiple components, your final one can be a simple <code>else</code> statement:
+	If you have multiple blocks, there is an optional final block that you can use which does not have identfying text. It looks like this:
 	</p>
 	<p><code>
 	else:</br>
 	&nbsp;some code
 	</code></p>
-	</div>
-	</div>
-	<h2>Writing Conditionals</h2>
-	<div class="subsubject">
-	<h4>The Syntax</h4>
 	<p>
-	The components in a conditional are written in the following way:
-	</p>
-	<p>
-	<code>keword condition:</br>
-	&nbsp;some code</code>
-	</p>
-	<p>
-	And each of these components follow each other with no gaps in between them. Like:
+	If this block is part of your conditional and none of the other blocks are executed, this one will be. Therefore, it is a shorter way of writing this as your last block.
 	</p>
 	<p><code>
-	keyword1 condition1:</br>
-	&nbsp;some code</br>
-	keyword2 condition2:</br>
-	&nbsp;some code</br>
-	</code></p>
-	<h4>The Keywords</h4>
-	<p>
-	Here are the rules:
-	</p>
-	<ul>
-		<li>The keyword for the first component is "if".</li>
-		<li>The keyword for the rest of the components is "elif".</li>
-	</ul>
-	<p>
-	So, for example, the above would become:
-	</p>
-	<p><code>
-	if condition1:</br>
-	&nbsp;some code</br>
-	elif condition2:</br>
+	elif True:</br>
 	&nbsp;some code
 	</code></p>
 	</div>
+	
+	</div>
+	
+	</div>
+</body>
+</html>
