@@ -57,3 +57,18 @@ td {
 .subsubject {
 	background-color: rgb(255, 164, 119);
 }
+
+.conditional {
+	height: 200px;
+	width: 320px;
+	overflow: hidden;
+	background-color: black;
+	float: left;
+	margin: 10px;
+} 
+
+.conditional img {
+	position: relative;
+	top: -80px;
+	left: -190px;
+}
