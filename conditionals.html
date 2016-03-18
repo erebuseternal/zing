@@ -6,28 +6,18 @@
 <div class="whole">
 	<h1>Conditionals</h1>
 	<div class="subject">
-	<h4>What are Conditionals for?</h4>
+	<h4>Why</h4>
 	<p>
 	<b>Conditionals allow you to</b> have code that only gets executed when a certain condition is satisfied. This means that you can <b>make your code act differently under different conditions</b>.
 	</p>
-	<div class="little_example">
+	<h4>What</h4>
 	<p>
-	As an example, conditionals allow me to create a program that tells me "good morning" if the time is before 12:00 p.m. but tells me "good afternoon" if the time is after 12:00 p.m.
+	Conditionals are made of blocks written one after another. Python knows these blocks are tied together because of the keywords they use. Each block's <span style="color:yellow">identifying text</span> is an expression that will act as a condition. On execution Python will begin looking at the blocks' expressions in order. Once it finds an expression that evaluates to True, it will execute that block's code and then skip the rest of the blocks. Therefore <b>the first component who's expression is true is the only one that has it's code run</b>. This is so that if you have many pieces of code for completely different situations only one will execute per situation. On the other hand, if you want many pieces to execute per situation you can always write several conditionals.
 	</p>
-	</div>
+	<h4>How</h4>
 	<p>
-	Conditionals are able to do this thanks to their structure and the way they are executed.  
+	So what are the rules for writing conditionals? As was stated above, writing conditionals is as simple as writing out its blocks one after the other. So here are the rules for those blocks.
 	</p>
-	<h4>Structure</h4>
-	<p>
-	The blocks in a Conditional have their <span style="color:yellow">identifying text</span> be a condition, and their <span style="color:white">code</span> be the code to be executed if the condition is true. Conditions are simply python expressions. Because any python expression evaluates to an object, and because all objects evaluate to either True or False, any expression works as a condition. Once you have your blocks in mind, the Conditional is then written by placing the blocks one after another.
-	</p>
-	<h4>How Conditionals are Executed</h4>
-	<p>
-	When your code is run, python will look through each block in order and check its condition. Once it finds a condition that is true, it will execute that block's code and skip the rest of the blocks. So <b>the first component who's condition is true is the only one that has it's code run</b>. This is so that if you have many pieces of code for completely different situations only one will execute per situation. On the other hand, if you want many pieces to execute per situation you can always write several conditionals.
-	</p>
-	<h4>Writing Conditionals</h4>
-	So what are the rules for writing conditionals? As was stated above, writing conditionals is a simple as writing out its blocks one after the other. So here are the rules for those blocks.
 	<div class="howto">
 	<h3>Rules for Writing the Blocks that Comprise Conditionals</h3>
 	<h4>Keywords</h4>
@@ -37,12 +27,13 @@
 	</ul>
 	<h4>Identifying Text</h4>
 	<p>
-	Acts as the condition for the code that follows. Any expression is legal. Use the expression that gives you the condition you want.
+	Just a python expression. Use the expression that gives you the condition you want.
 	</p>
 	<h4>Code</h4>
 	<p>
 	You can use loops, expressions and/or more conditionals. Other than that it is completely up to you!
 	</p>
+	</div>
 	<h4>Optional Final Block</h4>
 	<p>
 	If you have multiple blocks, there is an optional final block that you can use which does not have identfying text. It looks like this:
